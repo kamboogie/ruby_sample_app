@@ -10,10 +10,14 @@ RSpec.describe PagesController, :type => :controller do
     end
     
     it "should have the right title" do
-      visit '/static_pages/home'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | Home")
+      get 'home'
+      response.should have_selector("title", :content => "Ruby on Rails Tutorial Sample App | Home")
     end
     
+    it "should have non-blank body" do
+	    get 'home'
+	    response.body.should_not =~ /<body>\s*<\/body>/
+    end
   end
 
   describe "GET contact" do
@@ -23,8 +27,8 @@ RSpec.describe PagesController, :type => :controller do
     end
     
     it "should have the right title" do
-      visit '/static_pages/contact'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | Contact")
+      get 'home'
+      response.should have_selector("title", :content => "Ruby on Rails Tutorial Sample App | Contact")
     end
   end
 
@@ -35,10 +39,9 @@ RSpec.describe PagesController, :type => :controller do
     end
      
      it "should have the right title" do
-      visit '/static_pages/about'
-      expect(page).to have_title("Ruby on Rails Tutorial Sample App | About")
-    end
-     
+      get 'home'
+      response.should have_selector("title", :content => "Ruby on Rails Tutorial Sample App | About")
+    end  
   end
   
 end
