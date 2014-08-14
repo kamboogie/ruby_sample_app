@@ -18,6 +18,11 @@ RSpec.describe PagesController, :type => :controller do
 	    get 'home'
 	    response.body.should_not =~ /<body>\s*<\/body>/
     end
+    
+    it "should have the base title" do
+      visit '/static_pages/home'
+      expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+    end
   end
 
   describe "GET contact" do
